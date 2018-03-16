@@ -2,6 +2,7 @@
  * Create a list that holds all of your cards
  */
 
+const eachCard = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
 
 /*
  * Display the cards on the page
@@ -25,6 +26,27 @@ function shuffle(array) {
     return array;
 }
 
+// add each card's HTML to the page
+function createCard(cardClass) {
+    const cardLi = document.createElement('li');
+    cardLi.setAttribute('class', 'card');
+    const cardI = document.createElement('i');
+    cardI.setAttribute('class', cardClass);
+    const deck = document.querySelector('.deck');
+
+    deck.appendChild(cardLi);
+    cardLi.appendChild(cardI);
+}
+
+function makeGrid() {
+    shuffle(eachCard).forEach(createCard);
+}
+
+// event listener when DOM loaded make grid of cards
+document.addEventListener("DOMContentLoaded", function(event) {
+    console.log("DOM fully loaded and parsed");
+    makeGrid();
+  });
 
 /*
  * set up the event listener for a card. If a card is clicked:
