@@ -58,3 +58,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+ // empty array for open cards which will check for matching pairs
+let openCards = [];
+
+// event listener for fliping cards /* event delegation */
+const deck = document.querySelector('.deck');
+deck.addEventListener('click', openShow); 
+
+
+// toggle classes open & show
+// add cards to openCards
+function openShow(e) {
+if(e.target.nodeName === 'LI') {      
+       e.target.classList.toggle('open');
+       e.target.classList.toggle('show');
+       openCards.push(e.target);
+       console.log(openCards);
+   }
+}
+
