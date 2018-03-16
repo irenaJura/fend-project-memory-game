@@ -75,6 +75,27 @@ if(e.target.nodeName === 'LI') {
        e.target.classList.toggle('show');
        openCards.push(e.target);
        console.log(openCards);
+       checkLength();
    }
 }
 
+// if 2 cards open, check if match
+function checkLength() {
+    if(openCards.length === 2) {
+        checkIfMatch();
+    }
+}
+
+// if cards has same class add match class
+// else log no match
+// reset openCards for new check
+function checkIfMatch() {
+    if(openCards[0].firstChild.className === openCards[1].firstChild.className) {
+        console.log("match");
+        openCards[0].classList.add("match");
+        openCards[1].classList.add("match");
+    } else {
+        console.log("no match");
+    } 
+    openCards = [];
+}
