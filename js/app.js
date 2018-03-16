@@ -2,7 +2,7 @@
  * Create a list that holds all of your cards
  */
 
-const eachCard = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
+ const eachCard = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-bolt", "fa fa-cube", "fa fa-leaf", "fa fa-bicycle", "fa fa-bomb"];
 
 /*
  * Display the cards on the page
@@ -46,7 +46,7 @@ function makeGrid() {
 document.addEventListener("DOMContentLoaded", function(event) {
     console.log("DOM fully loaded and parsed");
     makeGrid();
-  });
+});
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -60,7 +60,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
  */
 
  // empty array for open cards which will check for matching pairs
-let openCards = [];
+ let openCards = [];
+
+//pairs variable starts at 0
+let pairs = 0;
 
 // number of moves user makes
 let moves = 0;
@@ -77,13 +80,13 @@ deck.addEventListener('click', openShow);
 // toggle classes open & show
 // add cards to openCards
 function openShow(e) {
-if(e.target.nodeName === 'LI') {      
-       e.target.classList.toggle('open');
-       e.target.classList.toggle('show');
-       openCards.push(e.target);
-       console.log(openCards);
-       checkLength();
-   }
+    if(e.target.nodeName === 'LI') {      
+     e.target.classList.toggle('open');
+     e.target.classList.toggle('show');
+     openCards.push(e.target);
+     console.log(openCards);
+     checkLength();
+ }
 }
 
 // if 2 cards open, check if match
@@ -108,6 +111,8 @@ function onEnd(e) {
 // if cards have same class add add animation and match class
 // else add animation for no match
 // reset openCards for new check
+// add a move
+// check if all pairs match to end game
 function checkIfMatch() {
     if(openCards[0].firstChild.className === openCards[1].firstChild.className) {
         console.log("match");
@@ -115,6 +120,7 @@ function checkIfMatch() {
         openCards[1].classList.add("tada");
         openCards[0].classList.add("match");
         openCards[1].classList.add("match");
+        pairs++;
     } else {
         console.log("no match");
         openCards[0].classList.toggle("shake");
@@ -122,6 +128,14 @@ function checkIfMatch() {
     } 
     openCards = [];
     addMoves();
+    if(pairs === 8) {
+        endGame()
+    }
+}
+
+
+function endGame() {
+    console.log("game over");
 }
 
 //increment moves by 1 after 2 cards opened
