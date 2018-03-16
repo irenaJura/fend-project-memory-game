@@ -173,3 +173,13 @@ function endGame() {
     stopTime();
     setTimeout(reStart, 800);
 }
+
+// confirm method from https://www.w3schools.com/jsref/met_win_confirm.asp
+function reStart() {
+    const playAgain = confirm("YEEEY! You finished the game in " + counter + " seconds and a " + elements.length + " star rating. Play again?");
+    if(playAgain == true){
+             window.location.reload();
+         } else {
+             alert("Thanks for playing!");
+     }
+}
