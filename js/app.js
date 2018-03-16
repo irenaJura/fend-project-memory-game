@@ -65,6 +65,10 @@ let openCards = [];
 // number of moves user makes
 let moves = 0;
 
+// stars variables for manipulation 
+let stars = document.querySelector('.stars'); // Get the list whose class is stars.
+let elements = stars.getElementsByTagName('li'); // Get HTMLCollection of elements with the li tag name.
+
 // event listener for fliping cards /* event delegation */
 const deck = document.querySelector('.deck');
 deck.addEventListener('click', openShow); 
@@ -124,5 +128,9 @@ function checkIfMatch() {
 function addMoves() {
     moves += 1;
     document.querySelector('.moves').innerHTML = moves;
+    if(moves === 13 || moves === 20) {
+        // Remove the child from queue that is the first li element. 
+        stars.removeChild(elements[0]);
+    }
 }
 
