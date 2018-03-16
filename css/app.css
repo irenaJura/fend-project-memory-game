@@ -109,6 +109,14 @@ h1 {
 }
 
 /* 
+ * Prevent double clicks on same card 
+ */
+
+.card.open .fa {
+    padding: 45px;
+}
+
+/* 
  * Animations for open cards
  */
 
