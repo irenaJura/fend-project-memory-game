@@ -183,3 +183,10 @@ function reStart() {
              alert("Thanks for playing!");
      }
 }
+
+//add eventlistener to reload page
+// location.reload from https://developer.mozilla.org/en-US/docs/Web/API/Location/reload
+const startAgain = document.querySelector('.restart');
+startAgain.addEventListener('click', function() {
+ window.location.reload();
+});
