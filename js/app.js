@@ -68,6 +68,11 @@ let pairs = 0;
 // number of moves user makes
 let moves = 0;
 
+// couter variables
+let counter = 0;
+let counterOn = 0;
+let t;
+
 // stars variables for manipulation 
 let stars = document.querySelector('.stars'); // Get the list whose class is stars.
 let elements = stars.getElementsByTagName('li'); // Get HTMLCollection of elements with the li tag name.
@@ -76,10 +81,15 @@ let elements = stars.getElementsByTagName('li'); // Get HTMLCollection of elemen
 const deck = document.querySelector('.deck');
 deck.addEventListener('click', openShow); 
 
-
+// counterOn set to true(1), starts counting
 // toggle classes open & show
 // add cards to openCards
 function openShow(e) {
+    if(!counterOn) {
+        counterOn = 1;
+        counter = 0;
+        startTime();
+    }
     if(e.target.nodeName === 'LI') {      
      e.target.classList.toggle('open');
      e.target.classList.toggle('show');
@@ -133,11 +143,7 @@ function checkIfMatch() {
     }
 }
 
-
-function endGame() {
-    console.log("game over");
-}
-
+// remove first child of ul https://stackoverflow.com/questions/14294518/remove-first-child-in-javascript
 //increment moves by 1 after 2 cards opened
 function addMoves() {
     moves += 1;
@@ -148,3 +154,22 @@ function addMoves() {
     }
 }
 
+// timer function from https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_win_settimeout_cleartimeout2
+function startTime() {
+    counter += 1;
+    document.querySelector('.counter').innerHTML = counter; 
+    t = setTimeout(startTime, 1000);
+}
+
+// clearTimeout function from https://www.w3schools.com/jsref/met_win_cleartimeout.asp
+function stopTime() {
+    clearTimeout(t);
+    counterOn = 0;
+}
+
+// end game and stop the time
+function endGame() {
+    console.log("game over");
+    stopTime();
+    setTimeout(reStart, 800);
+}
