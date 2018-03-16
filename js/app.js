@@ -86,16 +86,33 @@ function checkLength() {
     }
 }
 
-// if cards has same class add match class
-// else log no match
+// event listener for end of animation
+deck.addEventListener('animationend', onEnd);
+
+// remove classes after animation
+function onEnd(e) {
+    if(e.target.nodeName === 'LI') {
+        e.target.classList.remove('open');
+        e.target.classList.remove('show');
+        e.target.classList.remove('shake');
+    }
+};
+
+// if cards have same class add add animation and match class
+// else add animation for no match
 // reset openCards for new check
 function checkIfMatch() {
     if(openCards[0].firstChild.className === openCards[1].firstChild.className) {
         console.log("match");
+        openCards[0].classList.add("tada");
+        openCards[1].classList.add("tada");
         openCards[0].classList.add("match");
         openCards[1].classList.add("match");
     } else {
         console.log("no match");
+        openCards[0].classList.toggle("shake");
+        openCards[1].classList.toggle("shake");
     } 
     openCards = [];
 }
+
