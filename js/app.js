@@ -62,6 +62,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
  // empty array for open cards which will check for matching pairs
 let openCards = [];
 
+// number of moves user makes
+let moves = 0;
+
 // event listener for fliping cards /* event delegation */
 const deck = document.querySelector('.deck');
 deck.addEventListener('click', openShow); 
@@ -114,5 +117,12 @@ function checkIfMatch() {
         openCards[1].classList.toggle("shake");
     } 
     openCards = [];
+    addMoves();
+}
+
+//increment moves by 1 after 2 cards opened
+function addMoves() {
+    moves += 1;
+    document.querySelector('.moves').innerHTML = moves;
 }
 
